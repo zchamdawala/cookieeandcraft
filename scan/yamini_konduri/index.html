@@ -1,0 +1,57 @@
+<html>
+  <head>
+     <title> Made with love by @Cookieeandcraft</title> 
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes"></meta>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image.prod.js"></script>
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.0.0/dist/mindar-image-aframe.prod.js"></script>
+
+<script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const sceneEl = document.querySelector("a-scene");
+        const arSystem = sceneEl.systems["mindar-image-system"];
+        const exampleTarget = document.querySelector("#Cookiee-target");
+        const examplePlane = document.querySelector("#Cookiee-plane"); 
+        const pauseKeepVideoButton = document.querySelector("#example-pause-keep-video-button");
+        const unpauseButton = document.querySelector("#example-unpause-button");
+        const text = document.querySelector("#text");
+
+        const Cookiee = document.querySelector("#Cookiee");
+        exampleTarget.addEventListener("targetFound", (event) => {console.log("target found");Cookiee.play();});
+        exampleTarget.addEventListener("targetLost", (event) => {console.log("target lost");Cookiee.pause();});
+      
+        examplePlane.addEventListener("click", (event) => {console.log("Video Plane Clicked");Cookiee.play();});
+        text.setAttribute("value", "Follow us @cookieeandcraft");
+        text.addEventListener('click', (event) => {window.location.href="https://www.instagram.com/cookieeandcraft";});
+
+      });
+    </script>
+ 
+</head>
+  <body>
+    <a-scene
+      mindar-image="imageTargetSrc: targets.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" >
+     
+      <a-assets>
+        <video autoplay crossorigin="anonymous" preload="none" id="Cookiee" loop="true" webkit-playsinline playsinline controls artoolkit> 
+          <source src="video.mp4" />
+        </video>
+        </a-assets>
+
+      <a-camera
+        position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="far: 10000; objects: .clickable">
+      </a-camera>
+
+ 
+      <a-entity id="Cookiee-target" mindar-image-target="targetIndex: 0">
+        <a-plane
+          src="#Cookiee" id="Cookiee-plane" class="clickable" opaciy="0.5" position="0 0 0" height="1.8" width="1.2" rotation="0 0 0">
+        </a-plane>
+
+      </a-entity>
+    
+    </a-scene>
+
+  </body>
+</html>
